@@ -22,6 +22,12 @@ jobs:
     # Specifies the type of runner to use
     runs-on: ubuntu-latest
 
+    env:
+      TF_VAR_db_name: ${{ secrets.DB_NAME }}
+      TF_VAR_db_username: ${{ secrets.DB_USERNAME }}
+      TF_VAR_db_password: ${{ secrets.DB_PASSWORD }}
+      TF_VAR_key_name: ${{ secrets.KEY_NAME }}
+
     steps:
       # Step 1: Check out the repository code
       - name: Checkout repository
@@ -56,36 +62,3 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve # Auto-approve flag skips manual confirmation
 
-  terraform_destroy:
-    name: "Terraform_destroy"
-    if: ${{ github.event.inputs.action == 'Terraform_destroy' }}
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      # Step 2: Set up AWS credentials for authentication
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-
-        with:
-          # Using GitHub secrets for secure credential storage
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} # Secret variable
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # Secret variable
-          aws-region: ${{ vars.AWS_REGION }}  # Reference the repository variable
-
-      # Step 3: Install Terraform
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2.0.2
-        with:
-          terraform_version: 1.1.9 # Specifies Terraform version to use
-          terraform_wrapper: false
-
-      # Step 4: Initialize Terraform working directory
-      - name: Terraform Init
-        run: terraform init
-
-      # Step 5: Destroy the instance
-      - name: Terraform Destroy
-        run: terraform destroy -auto-approve
