@@ -6,10 +6,10 @@ resource "aws_db_instance" "stratostocks_db" {
   engine_version       = "8.0"  # MySQL version 8.0
   instance_class       = "db.t3.micro"  # Free tier eligible instance type
   db_name              = var.db_name  # Name of the WordPress database
-  username             = var.db_username  # Database admin username
-  password             = var.db_password  # Replace with a secure password
+  username             = var.username  # Database admin username
+  password             = var.password  # Replace with a secure password
   parameter_group_name = "default.mysql8.0"  # Default parameter group for MySQL 8.0
   skip_final_snapshot  = true  # Skip final snapshot when destroying the database
-  vpc_security_group_ids = [module.security_groups.rds_sg_id]  # Attach the RDS security group
-  db_subnet_group_name = aws_db_subnet_group.wordpress_db_subnet_group.name  # Use the created subnet group
+  vpc_security_group_ids = var.vpc_security_group_ids  # Attach the RDS security group
+  db_subnet_group_name = var.db_subnet_group_name # Use the created subnet group
 }
