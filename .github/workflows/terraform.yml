@@ -1,5 +1,9 @@
 name: "Terraform_apply"
 
+defaults:
+  run:
+    working-directory: terraform
+
 # Defines when the workflow will run
 on:
   # Manual trigger using GitHub Actions UI
@@ -53,6 +57,7 @@ jobs:
       # Step 4: Initialize Terraform working directory
       - name: Terraform Init
         run: terraform init
+
 
       # Step 5: Preview the infrastructure changes
       - name: Terraform Plan
