@@ -96,10 +96,6 @@ module "ec2" {
   subnet_id              = module.public_subnet.id  # Place in the public subnet just pick the first one
   sg_ids                 = module.security_groups.ec2_sg_id # Attach the EC2 security group
   key_name               = var.key_name
-
-  tags = {
-    Name = "StratoStocks EC2 Instance"
-  }
 }
 
 # DB Subnet Group
