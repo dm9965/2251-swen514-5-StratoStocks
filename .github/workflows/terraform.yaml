@@ -1,4 +1,4 @@
-name: "Terraform"
+name: "Terraform_apply"
 
 # Defines when the workflow will run
 on:
@@ -11,7 +11,6 @@ on:
         type: choice
         options:
           - Terraform_apply
-          - Terraform_destroy
 
 jobs:
   # Job for applying Terraform configurations
