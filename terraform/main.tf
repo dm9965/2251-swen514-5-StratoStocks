@@ -5,7 +5,6 @@ terraform {
         key = "environments/prod/terraform.tfstate" # Key for the bucket
         region = "us-east-1"
         encrypt = true
-        use-lockfile = true
     }
 }
 
