@@ -18,7 +18,7 @@ jobs:
   terraform_apply:
     name: "Terraform_apply"
     # Condition to run this job only when 'Terraform_apply' is selected
-    if: ${{ github.event.inputs.action == 'Terraform_apply'}}
+    if: ${{ github.event.inputs.action == 'Terraform_apply' || github.event_name == 'push'}}
     # Specifies the type of runner to use
     runs-on: ubuntu-latest
 
