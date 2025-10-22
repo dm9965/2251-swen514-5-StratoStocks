@@ -94,7 +94,7 @@ module "ec2" {
   ami                    = data.aws_ami.amazon_linux_2023.id  # Use the AMI above
   instance_type          = "t2.micro"  # Free tier eligible instance type
   subnet_id              = module.public_subnet.id  # Place in the public subnet just pick the first one
-  sg_ids                 = module.security_groups.ec2_sg_id # Attach the EC2 security group
+  sg_ids                 = [module.security_groups.ec2_sg_id] # Attach the EC2 security group
   key_name               = var.key_name
 }
 
