@@ -1,13 +1,4 @@
-# Create the Remote State file for team collaboration
-terraform {
-    backend "s3" {
-        bucket = "stratostocks-terraform-state-bucket" # Bucket name
-        key = "environments/prod/terraform.tfstate" # Key for the bucket
-        region = "us-east-1"
-        encrypt = true
-    }
-}
-
+# Set the provider region
 provider "aws" {
     region = "us-east-1"
 }
@@ -33,6 +24,11 @@ data "aws_ami" "amazon_linux_2023" {
     name   = "architecture"
     values = ["x86_64"]  # 64-bit x86 architecture only
   }
+}
+
+module "terraform-s3-bucket" {
+  source = "./modules/s3"
+  bucket_name = "stratostocks-terraform-state-bucket"
 }
 
 #VPC Module
@@ -126,3 +122,12 @@ module "rds" {
   db_subnet_group_name = aws_db_subnet_group.stratostocks_db_subnet_group.name  # Use the created subnet group
 }
 
+# Create the Remote State file for team collaboration
+terraform {
+  backend "s3" {
+    bucket = "stratostocks-terraform-state-bucket" # Bucket name
+    key = "environments/prod/terraform.tfstate" # Key for the bucket
+    region = "us-east-1"
+    encrypt = true
+  }
+}
