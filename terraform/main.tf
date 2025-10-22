@@ -37,7 +37,7 @@ module "vpc" {
   cidr_block = "10.0.0.0/16"
   enable_dns_hostnames = true
   enable_dns_support   = true
-  name = "WordPress VPC"
+  name = "Stratostocks VPC"
 }
 
 # Public Subnet Module
@@ -47,7 +47,7 @@ module "public_subnet" {
   cidr_block    = "10.0.1.0/24"
   az            = "us-east-1a"
   public        = true
-  subnet_name   = "WordPress Public Subnet"
+  subnet_name   = "Stratostocks Public Subnet"
 }
 
 # Private Subnet Module
@@ -57,13 +57,13 @@ module "private_subnet" {
   cidr_block    = "10.0.2.0/24"
   az            = "us-east-1b"
   public        = false
-  subnet_name   = "WordPress private Subnet"
+  subnet_name   = "Stratostocks private Subnet"
 }
 
 module "gateway" {
   source = "./modules/gateway"
   vpc_id = module.vpc.id
-  gateway_name = "Wordpress Internet Gateway"
+  gateway_name = "Stratostocks Internet Gateway"
 }
 
 # Public Route Table Module
@@ -72,7 +72,7 @@ module "route_table" {
   vpc_id = module.vpc.id
   cidr_block = "0.0.0.0/0"
   gateway_id = module.gateway.id
-  route_table_name = "Wordpress Public Route Table"
+  route_table_name = "Stratostocks Public Route Table"
 }
 
 # Associate Public Subnet with Public Route Table
@@ -111,7 +111,7 @@ resource "aws_db_subnet_group" "stratostocks_db_subnet_group" {
 # Create the RDS Instance
 module "rds" {
   source = "./modules/rds"
-  db_name              = var.db_name  # Name of the WordPress database
+  db_name              = var.db_name  # Name of the Stratostocks database
   username             = var.db_username  # Database admin username
   password             = var.db_password  # Replace with a secure password
   vpc_security_group_ids = [module.security_groups.rds_sg_id]  # Attach the RDS security group

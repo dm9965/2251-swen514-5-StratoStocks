@@ -1,3 +1,3 @@
 output "id" {
-  value = aws_vpc.wordpress_vpc.id
+  value = aws_vpc.stratostocks_vpc.id
 }

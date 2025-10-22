@@ -5,7 +5,7 @@ resource "aws_db_instance" "stratostocks_db" {
   engine               = "mysql"  # MySQL database engine
   engine_version       = "8.0"  # MySQL version 8.0
   instance_class       = "db.t3.micro"  # Free tier eligible instance type
-  db_name              = var.db_name  # Name of the WordPress database
+  db_name              = var.db_name  # Name of the Statostocks database
   username             = var.username  # Database admin username
   password             = var.password  # Replace with a secure password
   parameter_group_name = "default.mysql8.0"  # Default parameter group for MySQL 8.0

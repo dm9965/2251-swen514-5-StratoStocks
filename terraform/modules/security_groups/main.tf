@@ -3,8 +3,8 @@
 
 # EC2 Security Group
 resource "aws_security_group" "ec2_sg" {
-  name        = "wordpress_ec2_sg"
-  description = "Security group for WordPress EC2 instance"
+  name        = "stratostocks_ec2_sg"
+  description = "Security group for Stratostocks EC2 instance"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -31,8 +31,8 @@ resource "aws_security_group" "ec2_sg" {
 
 # RDS Security Group
 resource "aws_security_group" "rds_sg" {
-  name        = "wordpress_rds_sg"
-  description = "Security group for WordPress RDS instance"
+  name        = "stratostocks_rds_sg"
+  description = "Security group for Stratostocks RDS instance"
   vpc_id      = var.vpc_id
 
   ingress {
