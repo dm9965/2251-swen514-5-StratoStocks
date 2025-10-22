@@ -13,7 +13,7 @@ variable "subnet_id" {
 }
 
 variable "sg_ids" {
-    type = string
+    type = set(string)
 }
 
 variable "key_name" {
