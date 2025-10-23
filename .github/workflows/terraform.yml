@@ -80,7 +80,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Step 2: Set up AWS credentials for authentication
       - name: Configure AWS credentials
@@ -102,6 +102,9 @@ jobs:
       # Step 4: Initialize Terraform working directory
       - name: Terraform Init
         run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan -destroy
 
       # Step 5: Destroy the instance
       - name: Terraform Destroy
