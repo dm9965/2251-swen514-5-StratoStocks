@@ -118,6 +118,23 @@ module "rds" {
   db_subnet_group_name = aws_db_subnet_group.stratostocks_db_subnet_group.name  # Use the created subnet group
 }
 
+# Lambda Module - basic example packaged from files in modules/lambda/src
+module "lambda" {
+  source        = "./modules/lambda"
+  function_name = "stratostocks_basic_lambda"
+  handler       = "main.handler"
+  runtime       = "python3.10"
+  role_name     = "stratostocks_lambda_exec_role"
+  environment_vars = {
+    ENV = "dev"
+  }
+  tags = {
+    Project = "StratoStocks"
+    Component = "lambda"
+  }
+  allow_public_invoke = false
+}
+
 # Create the Remote State file for team collaboration
 terraform {
   backend "s3" {
