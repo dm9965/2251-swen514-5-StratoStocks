@@ -118,7 +118,7 @@ module "rds" {
   db_subnet_group_name = aws_db_subnet_group.stratostocks_db_subnet_group.name  # Use the created subnet group
 }
 
-# Lambda Module - basic example packaged from files in modules/lambda/src
+# Lambda Module
 module "lambda" {
   source        = "./modules/lambda"
   function_name = "stratostocks_basic_lambda"
