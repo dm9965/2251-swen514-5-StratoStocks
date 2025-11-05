@@ -135,6 +135,16 @@ module "lambda" {
   allow_public_invoke = false
 }
 
+module "comprehend" {
+  source       = "./modules/comprehend"
+  project_name = "stratostocks"   
+  enable_kms   = false            
+  tags = {
+    Project   = "StratoStocks"
+    Component = "comprehend"
+  }
+}
+
 # Create the Remote State file for team collaboration
 terraform {
   backend "s3" {
